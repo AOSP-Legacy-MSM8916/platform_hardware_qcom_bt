@@ -1,15 +1,13 @@
 LOCAL_PATH := $(call my-dir)
 
-include $(CLEAR_VARS)
+ifeq ($(TARGET_QCOM_BLUETOOTH_VARIANT),bt-caf)
 
-TMP_LOCAL_PATH := $(LOCAL_PATH)
+include $(LOCAL_PATH)/libbt-vendor/Android.mk
 
-ifeq ($(call is-vendor-board-platform,QCOM),true)
-include $(TMP_LOCAL_PATH)/libbt-vendor/Android.mk
-endif # is-vendor-board-platform
-
-include $(TMP_LOCAL_PATH)/tools/Android.mk
+#include $(LOCAL_PATH)/tools/Android.mk
 
 ifeq ($(TARGET_USE_QTI_BT_STACK),true)
 include $(TMP_LOCAL_PATH)/bthost_ipc/Android.mk
 endif #TARGET_USE_QTI_BT_STACK
+
+endif
